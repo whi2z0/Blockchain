@@ -1,7 +1,6 @@
-
-
 Following are the commands for setting up a simple private network of two nodes. 
 Both nodes will run on the local machine using the same genesis block and network ID. 
+
 The data directories for each node will be named node1 and node2.
 
 `mkdir node1 node2`
@@ -11,6 +10,7 @@ The following command creates an account for Node 1:
 geth --datadir node1 account new	
 
 This command returns a request for a password. Once a password has been provided the following information is returned to the terminal:
+
 Your new account is locked with a password. Please give a password. Do not forget this password.
 Password:
 Repeat password:
@@ -64,6 +64,7 @@ geth init --datadir node1 genesis.json
 This should be repeated for both nodes. 
 
 The following will be returned to the terminal:
+
 INFO [05-13|15:41:47.520] Maximum peer count                       ETH=50 LES=0 total=50
 INFO [05-13|15:41:47.520] Smartcard socket not found, disabling    err="stat /run/pcscd/pcscd.comm: no such file or directory"
 INFO [05-13|15:41:47.520] Set global gas cap                       cap=50,000,000
@@ -89,6 +90,7 @@ bootnode -nodekey boot.key -addr :30305
 The choice of port passed to -addr is arbitrary, but public Ethereum networks use 30303, so this is best avoided. 
 
 The bootnode command returns the following logs to the terminal, confirming that it is running:
+
 enode://f7aba85ba369923bffd3438b4c8fde6b1f02b1c23ea0aac825ed7eac38e6230e5cadcf868e73b0e28710f4c9f685ca71a86a4911461637ae9ab2bd852939b77f@127.0.0.1:0?discport=30305
 Note: you're using cmd/bootnode, a developer tool.
 We recommend using a regular node as bootstrap node for production deployments.
@@ -99,6 +101,7 @@ Open separate terminals for each node, leaving the bootnode running in the origi
 
 In each terminal, run the following command (replacing node1 with node2 where appropriate, and giving each node different --port and authrpc.port IDs. 
 The account address and password file for node 1 must also be provided:
+
 geth --datadir node1 --port 30306 --bootnodes enode://f7aba85ba369923bffd3438b4c8fde6b1f02b1c23ea0aac825ed7eac38e6230e5cadcf868e73b0e28710f4c9f685ca71a86a4911461637ae9ab2bd852939b77f@127.0.0.1:0?discport=30305  --networkid 123454321 --unlock 0xC1B2c0dFD381e6aC08f34816172d6343Decbb12b --password node1/password.txt --authrpc.port 8551
 
 This will start the node using the bootnode as an entry point. 
@@ -161,6 +164,7 @@ The details of this peer can also be queried and used to check that the peer rea
 admin.peers
 
 This should return the following:
+
 [{
     caps: ["eth/66", "snap/1"],
     enode: "enode://6a4576fb12004aa13949dbf25de978102483a6521e6d5d87c5b7ccb1944bbf8995dc730303ae891732410b1dd2e684277e9292fc0a17372a789bb4e87bdf366b@127.0.0.1:30307",
@@ -189,6 +193,7 @@ The account associated with Node 1 was supposed to be funded with some ether at 
 eth.getBalance(eth.accounts[0])
 
 This account can then be unlocked and some ether sent to Node 2, using the following commands:
+
 // send some Wei
 eth.sendTransaction({
   to: '0xc94d95a5106270775351eecfe43f97e8e75e59e8',
